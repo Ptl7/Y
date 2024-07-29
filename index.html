@@ -12,6 +12,43 @@
         align-items: center;
         height: 100vh;
       }
+
+      header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  header .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  header .search-container {
+    margin-top: 10px;
+  }
+
+  header input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+
+  header button {
+    padding: 10px;
+    border: none;
+    background-color: #ff6347;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+  }
       
       .box {
         background-color: #fff;
@@ -50,6 +87,15 @@
   </style>
   </head>
   <body>
+    
+    <header>
+  <div class="logo">Patel Games</div>
+  <div class="search-container">
+    <input type="text" placeholder="Search games...">
+    <button type="submit">Search</button>
+  </div>
+    </header>
+    
     <div class="box a">
       <a href='/subway-surfers' title='Subway Surfers'>
         <img src="/ssurfers.jpeg" alt="Subway Surfers" width="200" height="180">
