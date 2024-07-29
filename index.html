@@ -131,8 +131,8 @@
     <header>
       <div class="logo">Patel Games</div>
       <div class="search-container">
-        <input type="text" placeholder="Search games..." aria-label="Search games">
-        <button type="submit">Search</button>
+        <input type="text" id="search-input" placeholder="Search games..." aria-label="Search games">
+        <button id="search-button" type="button">Search</button>
       </div>
     </header>
     
@@ -172,5 +172,21 @@
         </a>
       </div>
     </main>
+
+    <script>
+      document.getElementById('search-button').addEventListener('click', function() {
+        var query = document.getElementById('search-input').value.trim();
+        if (query) {
+          window.location.href = '/search?query=' + encodeURIComponent(query);
+        }
+      });
+
+      document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault(); // Prevent form submission on Enter key
+          document.getElementById('search-button').click(); // Trigger the button click
+        }
+      });
+    </script>
   </body>
 </html>
