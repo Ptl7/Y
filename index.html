@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Patel Games</title>
@@ -7,49 +8,64 @@
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
       }
 
       header {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    position: top;
-    top: 0;
-    z-index: 1000;
-  }
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
 
-  header .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
+      header .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
 
-  header .search-container {
-    margin-top: 10px;
-  }
+      header .search-container {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+      }
 
-  header input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-  }
+      header input[type="text"] {
+        width: 80%;
+        max-width: 300px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        box-sizing: border-box;
+      }
 
-  header button {
-    padding: 10px;
-    border: none;
-    background-color: #ff6347;
-    color: white;
-    cursor: pointer;
-    border-radius: 0 5px 5px 0;
-  }
-      
+      header button {
+        padding: 10px;
+        border: none;
+        background-color: #ff6347;
+        color: white;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        box-sizing: border-box;
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+
       .box {
         background-color: #fff;
         border: 1px solid #ddd;
@@ -57,72 +73,98 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         text-align: center;
-        width: 200px;
+        width: 100%;
+        max-width: 200px;
+        margin: 10px;
+        box-sizing: border-box;
       }
-      
+
       .box a {
         color: #333;
         text-decoration: none;
+        display: block;
       }
-      
+
       .box img {
         border-bottom: 1px solid #ddd;
         display: block;
         max-width: 100%;
         height: auto;
       }
-      
+
       .box .tb {
         padding: 15px;
         font-size: 16px;
         font-weight: bold;
         background-color: #f9f9f9;
       }
-      
+
       .box:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
         transition: all 0.3s ease;
       }
-  </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4976114023142215"
-     crossorigin="anonymous"></script>
+
+      @media (max-width: 600px) {
+        header .logo {
+          font-size: 20px;
+        }
+
+        header input[type="text"] {
+          width: 70%;
+        }
+
+        .box .tb {
+          font-size: 14px;
+        }
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4976114023142215" crossorigin="anonymous"></script>
   </head>
   <body>
-      <div class="box a">
-      <a href='/subway-surfers' title='Subway Surfers'>
-        <img src="/ssurfers.jpeg" alt="Subway Surfers" width="200" height="180">
-        <div class="tb">Subway Surfers</div>
-      </a>
-    </div>
-  
-    <div class="box a">
-      <a href='/happy-wheels' title='Happy Wheels'>
-        <img src="/wheels.png" alt="Happy Wheels" width="200" height="180">
-        <div class="tb">Happy Wheels<br><small>(For PC only)</small></div>
-      </a>
-    </div>
-
-    <div class="box a">
-      <a href='/uno' title='Uno'>
-        <img src="/uno.png" alt="Uno" width="200" height="180">
-        <div class="tb">Uno</div>
-      </a>
-    </div>
-
-    <div class="box a">
-      <a href='/8-ball-pool' title='8-Ball-Pool'>
-        <img src="/8-ball-pool.webp" alt="8-Ball-Pool" width="200" height="180">
-        <div class="tb">8 Ball Pool</div>
-      </a>
-    </div>
-
-    <div class="box a">
-      <a href='/pacman' title='Pacman'>
-        <img src="/pacman.png" alt="Pacman" width="200" height="180">
-        <div class="tb">Pacman</div>
-      </a>
-    </div>
+    <header>
+      <div class="logo">Patel Games</div>
+      <div class="search-container">
+        <input type="text" placeholder="Search games...">
+        <button type="submit">Search</button>
+      </div>
+    </header>
     
+    <div class="content">
+      <div class="box">
+        <a href="/subway-surfers" title="Subway Surfers">
+          <img src="/ssurfers.jpeg" alt="Subway Surfers">
+          <div class="tb">Subway Surfers</div>
+        </a>
+      </div>
+
+      <div class="box">
+        <a href="/happy-wheels" title="Happy Wheels">
+          <img src="/wheels.png" alt="Happy Wheels">
+          <div class="tb">Happy Wheels<br><small>(For PC only)</small></div>
+        </a>
+      </div>
+
+      <div class="box">
+        <a href="/uno" title="Uno">
+          <img src="/uno.png" alt="Uno">
+          <div class="tb">Uno</div>
+        </a>
+      </div>
+
+      <div class="box">
+        <a href="/8-ball-pool" title="8-Ball-Pool">
+          <img src="/8-ball-pool.webp" alt="8-Ball-Pool">
+          <div class="tb">8 Ball Pool</div>
+        </a>
+      </div>
+
+      <div class="box">
+        <a href="/pacman" title="Pacman">
+          <img src="/pacman.png" alt="Pacman">
+          <div class="tb">Pacman</div>
+        </a>
+      </div>
+    </div>
   </body>
 </html>
