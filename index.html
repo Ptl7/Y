@@ -18,6 +18,7 @@
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
+        transition: background-color 0.3s, color 0.3s;
       }
 
       header {
@@ -30,6 +31,7 @@
         top: 0;
         z-index: 1000;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, color 0.3s;
       }
 
       header .logo {
@@ -41,6 +43,7 @@
         margin-top: 10px;
         display: flex;
         justify-content: center;
+        align-items: center;
       }
 
       header input[type="text"] {
@@ -63,6 +66,60 @@
         box-sizing: border-box;
       }
 
+      .toggle-container {
+        margin-top: 10px;
+      }
+
+      .toggle-label {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #666;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+
       .content {
         display: flex;
         flex-wrap: wrap;
@@ -83,6 +140,7 @@
         max-width: 200px;
         margin: 10px;
         box-sizing: border-box;
+        transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
       }
 
       .box a {
@@ -124,97 +182,128 @@
           font-size: 14px;
         }
       }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+
+      header.dark-mode {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+      }
+
+      .box.dark-mode {
+        background-color: #1f1f1f;
+        border-color: #333;
+      }
+
+      .box.dark-mode a {
+        color: #e0e0e0;
+      }
+
+      .box.dark-mode .tb {
+        background-color: #333;
+      }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4976114023142215" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <div class="logo">Patel Games</div>
-      <div class="search-container">
+      <div align="left" class="logo">Patel Games</div>
+      <div align="center" class="search-container">
         <input type="text" id="search-input" placeholder="Search games..." aria-label="Search games">
         <button id="search-button" type="button">Search</button>
+      </div>
+      
+      <div align="right" class="toggle-container">
+        <label class="toggle-label">Dark Mode</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="dark-mode-toggle">
+          <span class="slider"></span>
+        </label>
       </div>
     </header>
     
     <main class="content">
-      <div class="box">
+      <div class="box" data-game="Subway Surfers">
         <a href="/subway-surfers" title="Play Subway Surfers">
           <img src="/ssurfers.jpeg" alt="Play Subway Surfers online" loading="lazy">
           <div class="tb">Subway Surfers</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Happy Wheels">
         <a href="/happy-wheels" title="Play Happy Wheels">
           <img src="/wheels.png" alt="Play Happy Wheels online" loading="lazy">
           <div class="tb">Happy Wheels<br><small>(For PC only)</small></div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Uno">
         <a href="/uno" title="Play Uno">
           <img src="/uno.png" alt="Play Uno online" loading="lazy">
           <div class="tb">Uno</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="8 Ball Pool">
         <a href="/8-ball-pool" title="Play 8 Ball Pool">
           <img src="/8-ball-pool.webp" alt="Play 8 Ball Pool online" loading="lazy">
           <div class="tb">8 Ball Pool</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Pacman">
         <a href="/pacman" title="Play Pacman">
           <img src="/pacman.png" alt="Play Pacman online" loading="lazy">
           <div class="tb">Pacman</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Snake and Ladders">
         <a href="/snake-ladders" title="Play Snake and Ladders">
           <img src="/snakes-ladders.jpg" alt="Play Snake and Ladders online" loading="lazy">
           <div class="tb">Snake And Ladders</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Tic Tac Toe">
         <a href="/tic-tac-toe" title="Play Tic Tac Toe">
           <img src="/tic-tac-toe.png" alt="Play Tic Tac Toe online" loading="lazy">
           <div class="tb">Tic Tac Toe</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Carrom Clash">
         <a href="/carrom" title="Play Carrom">
           <img src="/carrom.webp" alt="Play Carrom online" loading="lazy">
           <div class="tb">Carrom Clash</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Jetpack Joyride">
         <a href="/jetpack-joyride" title="Play Jetpack Joyride">
           <img src="/jetpack-joyride.jpg" alt="Play Jetpack Joyride online" loading="lazy">
           <div class="tb">Jetpack Joyride</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="High Hills">
         <a href="/high-hills" title="Play High Hills">
           <img src="/high-hills.jpg" alt="Play High Hills online" loading="lazy">
           <div class="tb">High Hills</div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Tetris">
         <a href="/tetris" title="Play Tetris">
           <img src="/tetris.jpeg" alt="Play Tetris online" loading="lazy">
           <div class="tb">Tetris<br><small>(For PC only)</small></div>
         </a>
       </div>
 
-      <div class="box">
+      <div class="box" data-game="Table Tennis">
         <a href="/table-tennis" title="Play Table Tennis">
           <img src="/table-tennis.jpg" alt="Play Table Tennis online" loading="lazy">
           <div class="tb">Table Tennis</div>
@@ -223,18 +312,48 @@
     </main>
 
     <script>
+      document.getElementById('search-input').addEventListener('input', function() {
+        var query = this.value.toLowerCase();
+        var gameBoxes = document.querySelectorAll('.box');
+
+        gameBoxes.forEach(function(box) {
+          var gameName = box.getAttribute('data-game').toLowerCase();
+          if (gameName.includes(query)) {
+            box.style.display = 'block';
+          } else {
+            box.style.display = 'none';
+          }
+        });
+      });
+
       document.getElementById('search-button').addEventListener('click', function() {
-        var query = document.getElementById('search-input').value.trim();
-        if (query) {
-          window.location.href = '/search?query=' + encodeURIComponent(query);
-        }
+        var query = document.getElementById('search-input').value.toLowerCase();
+        var gameBoxes = document.querySelectorAll('.box');
+
+        gameBoxes.forEach(function(box) {
+          var gameName = box.getAttribute('data-game').toLowerCase();
+          if (gameName.includes(query)) {
+            box.style.display = 'block';
+          } else {
+            box.style.display = 'none';
+          }
+        });
       });
 
       document.getElementById('search-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-          e.preventDefault(); // Prevent form submission on Enter key
-          document.getElementById('search-button').click(); // Trigger the button click
+          e.preventDefault();
+          document.getElementById('search-button').click();
         }
+      });
+
+      // Dark Mode Toggle
+      document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode');
+        document.querySelectorAll('.box').forEach(function(box) {
+          box.classList.toggle('dark-mode');
+        });
+        document.querySelector('header').classList.toggle('dark-mode');
       });
     </script>
   </body>
