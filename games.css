@@ -52,6 +52,8 @@ header .logo {
 iframe {
     border: none;
     border-radius: 5px;
+    width: calc(1080px - 8px); /* Reducing width by 8px (4px on each side) */
+    height: 720px;
 }
 
 /* Ad space styling */
