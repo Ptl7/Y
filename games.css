@@ -3,8 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
     padding: 10px;
@@ -31,6 +30,13 @@ a.neave .disc {
 
 svg {
     fill: #ff4500;
+}
+
+.main-content {
+    flex: 1; /* Allows the content to expand and push footer down */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
@@ -89,4 +95,25 @@ svg {
         padding: 20px;
         margin-top: 0; /* Remove margin-top for desktop layout */
     }
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #ff4500;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }
