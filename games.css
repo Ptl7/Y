@@ -19,6 +19,11 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures the header stays on top */
 }
 
 header a {
@@ -35,8 +40,10 @@ header a {
     align-items: center;
     height: calc(100vh - 100px); /* Adjust based on footer height */
     padding: 20px;
+    margin-top: 57px; /* Adjust based on header height + 7px */
 }
 
+/* Iframe styling */
 iframe {
     border: none;
     border-radius: 5px;
@@ -54,6 +61,7 @@ iframe {
     color: #fff;
     text-align: center;
     padding: 10px;
+    position: fixed;
     width: 100%;
     bottom: 0;
 }
