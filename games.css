@@ -33,6 +33,11 @@ header a {
     font-weight: bold;
 }
 
+header .logo {
+        font-size: 24px;
+        font-weight: bold;
+}
+
 /* Content section styling */
 .content {
     display: flex;
