@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LK7RNX4QJS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LK7RNX4QJS');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Patel Games offers a variety of popular games including Subway Surfers, Happy Wheels, Uno, 8 Ball Pool, and Pacman. Play your favorite games online!">
+    <meta name="keywords" content="games, online games, Subway Surfers, Happy Wheels, Uno, 8 Ball Pool, Pacman, Patel Games, action games, adventure games, puzzle games, strategy games, casual games, sports games, arcade games, mobile games, PC games, free games, multiplayer games, single player games, kids games, family games, board games, card games, brain games, educational games, fun games, new games, popular games, top games, best games, game reviews, game ratings, game news, game updates, game tips, game tricks, game guides, game walkthroughs, game cheats, game hacks, game mods, game forums, game blogs, game communities, game developers, game designers, game studios, game publishers, game streaming, game videos, game trailers, game assets, game music, game sound effects, game art, game graphics, game engines, game software, game tools, game platforms, game websites, game apps, game technology, game innovation, game trends, game history, game culture, game mechanics, game systems, game achievements, game trophies, game challenges, game rewards, game competitions, game tournaments, game leagues, game communities, game social, game interaction, game experience, game immersion, game realism, game simulation, game narrative, game story, game characters, game environments, game worlds, game levels, game missions, game quests, game modes, game play styles, game physics, game animations, game effects, game dynamics, game balance, game strategy, game tactics">
+    <meta name="author" content="Patel Games">
+    <meta name="robots" content="index, follow">
+    <title>Patel Games - Play Your Favorite Online Games</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      header .search-container {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header input[type="text"] {
+        width: 80%;
+        max-width: 300px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      header button {
+        padding: 10px;
+        border: none;
+        background-color: #ff6347;
+        color: white;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        box-sizing: border-box;
+      }
+
+      .toggle-container {
+        margin-top: 10px;
+      }
+
+      .toggle-label {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #666;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      .box {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        width: 100%;
+        max-width: 200px;
+        margin: 10px;
+        box-sizing: border-box;
+        transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .box a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+      }
+
+      .box img {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .box .tb {
+        padding: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #f9f9f9;
+      }
+
+      .box:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+      }
+
+      @media (max-width: 600px) {
+        header .logo {
+          font-size: 20px;
+        }
+
+        header input[type="text"] {
+          width: 70%;
+        }
+
+        .box .tb {
+          font-size: 14px;
+        }
+      }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+
+      header.dark-mode {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+      }
+
+      .box.dark-mode {
+        background-color: #1f1f1f;
+        border-color: #333;
+      }
+
+      .box.dark-mode a {
+        color: #e0e0e0;
+      }
+
+      .box.dark-mode .tb {
+        background-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div align="center" class="logo">Patel Games</div>
+      <div align="center" class="search-container">
+        <input type="text" id="search-input" placeholder="Search games..." aria-label="Search games">
+        <button id="search-button" type="button">Search</button>
+      </div>
+      <div align="right" class="toggle-container">
+        <label class="toggle-label">Dark Mode</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="dark-mode-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+    
+    <main class="content">
+      <div class="box" data-game="Subway Surfers">
+        <a href="/subway-surfers" title="Play Subway Surfers">
+          <img src="/ssurfers.jpeg" alt="Play Subway Surfers online" loading="lazy">
+          <div class="tb">Subway Surfers</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Happy Wheels">
+        <a href="/happy-wheels" title="Play Happy Wheels">
+          <img src="/wheels.png" alt="Play Happy Wheels online" loading="lazy">
+          <div class="tb">Happy Wheels<br><small>(For PC only)</small></div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Uno">
+        <a href="/uno" title="Play Uno">
+          <img src="/uno.png" alt="Play Uno online" loading="lazy">
+          <div class="tb">Uno</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="8 Ball Pool">
+        <a href="/8-ball-pool" title="Play 8 Ball Pool">
+          <img src="/8-ball-pool.webp" alt="Play 8 Ball Pool online" loading="lazy">
+          <div class="tb">8 Ball Pool</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Pacman">
+        <a href="/pacman" title="Play Pacman">
+          <img src="/pacman.png" alt="Play Pacman online" loading="lazy">
+          <div class="tb">Pacman</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Tic Tac Toe">
+        <a href="/tic-tac-toe" title="Play Tic Tac Toe">
+          <img src="/tic-tac-toe.png" alt="Play Tic Tac Toe online" loading="lazy">
+          <div class="tb">Tic Tac Toe</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Carrom Clash">
+        <a href="/carrom" title="Play Carrom">
+          <img src="/carrom.webp" alt="Play Carrom online" loading="lazy">
+          <div class="tb">Carrom Clash</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Jetpack Joyride">
+        <a href="/jetpack-joyride" title="Play Jetpack Joyride">
+          <img src="/jetpack-joyride.jpg" alt="Play Jetpack Joyride online" loading="lazy">
+          <div class="tb">Jetpack Joyride</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="High Hills">
+        <a href="/high-hills" title="Play High Hills">
+          <img src="/high-hills.jpg" alt="Play High Hills online" loading="lazy">
+          <div class="tb">High Hills</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Tetris">
+        <a href="/tetris" title="Play Tetris">
+          <img src="/tetris.jpeg" alt="Play Tetris online" loading="lazy">
+          <div class="tb">Tetris<br><small>(For PC only)</small></div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Table Tennis">
+        <a href="/table-tennis" title="Play Table Tennis">
+          <img src="/table-tennis.jpg" alt="Play Table Tennis online" loading="lazy">
+          <div class="tb">Table Tennis</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Temple Run">
+        <a href="/temple-run" title="Play Temple Run">
+          <img src="/temple-run.png" alt="Play Temple Run 2 online" loading="lazy">
+          <div class="tb">Temple Run 2</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Air Hockey">
+        <a href="/air-hockey" title="Play Air Hockey">
+          <img src="/air-hockey.jpg" alt="Play Air Hockey online" loading="lazy">
+          <div class="tb">Air Hockey</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Fruit Ninja">
+        <a href="/fruit-ninja" title="Play Fruit Ninja">
+          <img src="/fruit-ninja.jpg" alt="Play Fruit Ninja online" loading="lazy">
+          <div class="tb">Fruit Ninja</div>
+        </a>
+      </div>
+
+      <div class="box" data-game="Sudoku">
+        <a href="/sudoku" title="Play Sudoku">
+          <img src="/sudoku.webp" alt="Play Sudoku online" loading="lazy">
+          <div class="tb">Sudoku</div>
+        </a>
+      </div>
+    </main>
+
+    <script>
+      document.getElementById('search-input').addEventListener('input', function() {
+        var query = this.value.toLowerCase();
+        var gameBoxes = document.querySelectorAll('.box');
+
+        gameBoxes.forEach(function(box) {
+          var gameName = box.getAttribute('data-game').toLowerCase();
+          if (gameName.includes(query)) {
+            box.style.display = 'block';
+          } else {
+            box.style.display = 'none';
+          }
+        });
+      });
+
+      document.getElementById('search-button').addEventListener('click', function() {
+        var query = document.getElementById('search-input').value.toLowerCase();
+        var gameBoxes = document.querySelectorAll('.box');
+
+        gameBoxes.forEach(function(box) {
+          var gameName = box.getAttribute('data-game').toLowerCase();
+          if (gameName.includes(query)) {
+            box.style.display = 'block';
+          } else {
+            box.style.display = 'none';
+          }
+        });
+      });
+
+      document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          document.getElementById('search-button').click();
+        }
+      });
+
+      // Dark Mode Toggle
+      document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode');
+        document.querySelectorAll('.box').forEach(function(box) {
+          box.classList.toggle('dark-mode');
+        });
+        document.querySelector('header').classList.toggle('dark-mode');
+      });
+    </script>
+    <footer class="footer">
+    <p>© 2024 Patel Games. All rights reserved. <a href="#">Privacy Policy</a></p>
+    </footer>
+  </body>
+</html>
