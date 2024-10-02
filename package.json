@@ -1,12 +1,12 @@
 {
-	"name": "Books",
+	"name": "Patel Books",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/liyasthomas/books.git"
+		"url": "https://github.com/Ptl7/Y"
 	},
 	"description": "Find books from Google Play Books",
-	"author": "liyasthomas",
-	"version": "0.0.1",
+	"author": "Patel Yahya",
+	"version": "1.0.0"
 	"devDependencies": {
 		"jshint": "^2.10.2"
 	},
