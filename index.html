@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLaMA Chatbot</title>
+    <title>Commercial AI Chatbot</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h2>LLaMA Chatbot</h2>
+            <h2>Commercial AI Chatbot</h2>
         </div>
         <div class="chat-body">
             <div id="messages"></div>
@@ -60,53 +60,52 @@
         </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.13.0/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/llama-js@1.1.1/dist/llama.min.js"></script>
     <script>
         // Initialize the LLaMA model
         const llama = new LLaMA({
-            model: 'https://cdn.jsdelivr.net/npm/llama-js@1.1.1/dist/models/llama-7b/model.json',
-            tokenizer: 'https://cdn.jsdelivr.net/npm/llama-js@1.1.1/dist/models/llama-7b/tokenizer.json',
+            model: 'https://storage.googleapis.com/llama-js-models/llama-7b/model.json',
+            tokenizer: 'https://storage.googleapis.com/llama-js-models/llama-7b/tokenizer.json',
             device: 'cpu'
         });
         
-        // Get the user input and send button elements
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        
-        // Get the messages container element
-        const messagesContainer = document.getElementById('messages');
-        
-        // Function to handle user input
+        // Define a function to handle user input
         async function handleUserInput() {
             // Get the user's input
-            const userMessage = userInput.value.trim();
+            const userMessage = document.getElementById('user-input').value.trim();
             
             // Clear the user input field
-            userInput.value = '';
+            document.getElementById('user-input').value = '';
             
             // Display the user's message
             const userMessageElement = document.createElement('div');
             userMessageElement.className = 'message message-user';
             userMessageElement.innerText = userMessage;
-            messagesContainer.appendChild(userMessageElement);
+            document.getElementById('messages').appendChild(userMessageElement);
             
             // Generate a response using LLaMA
-            const response = await llama.generate({
-                prompt: userMessage,
-                maxTokens: 2048,
-                temperature: 0.7,
-                topP: 0.9
-            });
+            let response;
+            if (userMessage.toLowerCase().includes("ai")) {
+                response = "You can use Meta’s AI Studio to build an AI character based on your interests. Go to Instagram and navigate to your DMs. Tap the compose icon, and select “AI Chats” to access other AIs Select the “Create” option. If you’re having a creative block, you can use pre-filled templates to build your AI, generated from your interests. Once your AI character is generated, you can edit, fine tune and experiment with how it communicates. Publish your AI by sharing it publicly, with close friends or you can keep it private just for you to chat with. You can also create your AI character on desktop by going to ​​https://ai.meta.com/ai-studio/";
+            } else {
+                response = await llama.generate({
+                    prompt: userMessage,
+                    maxTokens: 2048,
+                    temperature: 0.7,
+                    topP: 0.9
+                });
+            }
             
             // Display the response
             const responseElement = document.createElement('div');
             responseElement.className = 'message message-bot';
             responseElement.innerText = response;
-            messagesContainer.appendChild(responseElement);
+            document.getElementById('messages').appendChild(responseElement);
         }
         
         // Add an event listener to the send button
-        sendButton.addEventListener('click', handleUserInput);
+        document.getElementById('send-button').addEventListener('click', handleUserInput);
     </script>
 </body>
 </html>
