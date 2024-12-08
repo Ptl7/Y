@@ -60,90 +60,6 @@
         </div>
     </div>
     
-    <script>
-        // Initialize the LLaMA model
-        const llamaModel = new LLaMA({
-            model: 'llama-7b',
-            tokenizer: 'llama-7b',
-            device: 'cpu'
-        });
-        
-        // Get the user input and send button elements
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        
-        // Get the messages container element
-        const messagesContainer = document.getElementById('messages');
-        
-        // Function to handle user input
-        async function handleUserInput() {
-            // Get the user's input
-            const userMessage = userInput.value.trim();
-            
-            // Clear the user input field
-            userInput.value = '';
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLaMA Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        
-        .chat-container {
-            width: 80%;
-            margin: 40px auto;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .chat-header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .chat-body {
-            padding: 20px;
-        }
-        
-        .message {
-            margin-bottom: 20px;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        
-        .message-user {
-            background-color: #f0f0f0;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .message-bot {
-            background-color: #e0e0e0;
-            border-radius: 0 10px 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <h2>LLaMA Chatbot</h2>
-        </div>
-        <div class="chat-body">
-            <div id="messages"></div>
-            <input id="user-input" type="text" placeholder="Type a message...">
-            <button id="send-button">Send</button>
-        </div>
-    </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/llama-js@1.1.1/dist/llama.min.js"></script>
     <script>
         // Initialize the LLaMA model
@@ -176,32 +92,6 @@
             
             // Generate a response using LLaMA
             const response = await llama.generate({
-                prompt: userMessage,
-                maxTokens: 2048,
-                temperature: 0.7,
-                topP: 0.9
-            });
-            
-            // Display the response
-            const responseElement = document.createElement('div');
-            responseElement.className = 'message message-bot';
-            responseElement.innerText = response;
-            messagesContainer.appendChild(responseElement);
-        }
-        
-        // Add an event listener to the send button
-        sendButton.addEventListener('click', handleUserInput);
-    </script>
-</body>
-</html>          
-            // Display the user's message
-            const userMessageElement = document.createElement('div');
-            userMessageElement.className = 'message message-user';
-            userMessageElement.innerText = userMessage;
-            messagesContainer.appendChild(userMessageElement);
-            
-            // Generate a response using LLaMA
-            const response = await llamaModel.generate({
                 prompt: userMessage,
                 maxTokens: 2048,
                 temperature: 0.7,
