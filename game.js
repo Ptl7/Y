@@ -7,7 +7,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-// Orbit controls for better camera movement
+// Orbit controls
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
@@ -39,17 +39,17 @@ const skyboxTexture = skyboxLoader.load([
 ]);
 scene.background = skyboxTexture;
 
-// Load high-quality texture
+// Load texture for terrain
 const loader = new THREE.TextureLoader();
-const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg', () => {
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(4, 4);
+const terrainTexture = loader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg', () => {
+    terrainTexture.wrapS = terrainTexture.wrapT = THREE.RepeatWrapping;
+    terrainTexture.repeat.set(4, 4);
 });
 
-// Function to create a terrain with height map
-function createTerrain(width, height, x, z) {
-    const geometry = new THREE.PlaneGeometry(width, height, 128, 128);
-    const material = new THREE.MeshStandardMaterial({ map: texture });
+// Function to create terrain
+function createTerrain(x, z) {
+    const geometry = new THREE.PlaneGeometry(100, 100, 32, 32);
+    const material = new THREE.MeshStandardMaterial({ map: terrainTexture });
     const terrain = new THREE.Mesh(geometry, material);
     terrain.rotation.x = -Math.PI / 2;
     terrain.position.set(x, 0, z);
@@ -63,35 +63,25 @@ function createTerrain(width, height, x, z) {
     body.position.set(x, 0, z);
     body.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
     world.addBody(body);
-
-    return terrain;
 }
 
-// Create multiple terrains
-const terrainSize = 100;
-const terrains = [];
-const gridSize = 5;
-
-for (let i = 0; i < gridSize; i++) {
-    for (let j = 0; j < gridSize; j++) {
-        const x = i * terrainSize - (gridSize * terrainSize) / 2;
-        const z = j * terrainSize - (gridSize * terrainSize) / 2;
-        const terrain = createTerrain(terrainSize, terrainSize, x, z);
-        terrains.push(terrain);
+// Generate a grid of terrains
+const gridSize = 5; // 5x5 grid
+for (let i = -gridSize / 2; i <= gridSize / 2; i++) {
+    for (let j = -gridSize / 2; j <= gridSize / 2; j++) {
+        createTerrain(i * 100, j * 100);
     }
 }
 
-// Character setup using GLTF loader
+// Character setup
 const gltfLoader = new THREE.GLTFLoader();
 let character, characterBody;
 
 gltfLoader.load('path/to/gltf/model.gltf', (gltf) => {
     character = gltf.scene;
     character.scale.set(1, 1, 1);
-    character.traverse(node => {
-        if (node.isMesh) {
-            node.castShadow = true;
-        }
+    character.traverse((node) => {
+        if (node.isMesh) node.castShadow = true;
     });
     scene.add(character);
 
@@ -103,194 +93,107 @@ gltfLoader.load('path/to/gltf/model.gltf', (gltf) => {
     world.addBody(characterBody);
 });
 
-// Camera positioning
-camera.position.set(0, 20, -30);
-camera.lookAt(0, 0, 0);
-
-// Post-processing
-const composer = new THREE.EffectComposer(renderer);
-const renderPass = new THREE.RenderPass(scene, camera);
-composer.addPass(renderPass);
-
-const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-bloomPass.threshold = 0.21;
-bloomPass.strength = 1.2;
-bloomPass.radius = 0.55;
-composer.addPass(bloomPass);
-
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Update physics
-    world.step(1 / 60);
-
-    // Sync character position if loaded
-    if (character && characterBody) {
-        character.position.copy(characterBody.position);
-        character.quaternion.copy(characterBody.quaternion);
-    }
-
-    controls.update();
-    composer.render();
-}
-animate();
-
-// Character movement controls
-document.addEventListener('keydown', (event) => {
-    const force = 200;
-    switch (event.code) {
-        case 'ArrowUp':
-            characterBody.applyLocalForce(new CANNON.Vec3(0, 0, -force), new CANNON.Vec3(0, 0, 0));
-            break;
-        case 'ArrowDown':
-            characterBody.applyLocalForce(new CANNON.Vec3(0, 0, force), new CANNON.Vec3(0, 0, 0));
-            break;
-        case 'ArrowLeft':
-            characterBody.applyLocalForce(new CANNON.Vec3(-force, 0, 0), new CANNON.Vec3(0, 0, 0));
-            break;
-        case 'ArrowRight':
-            characterBody.applyLocalForce(new CANNON.Vec3(force, 0, 0), new CANNON.Vec3(0, 0, 0));
-            break;
-    }
-});
-
-// Mobile controls
-const controlsUI = {
-    up: document.getElementById('up'),
-    down: document.getElementById('down'),
-    left: document.getElementById('left'),
-    right: document.getElementById('right')
-};
-
-controlsUI.up.addEventListener('touchstart', () => {
-    characterBody.applyLocalForce(new CANNON.Vec3(0, 0, -200), new CANNON.Vec3(0, 0, 0));
-});
-controlsUI.down.addEventListener('touchstart', () => {
-    characterBody.applyLocalForce(new CANNON.Vec3(0, 0, 200), new CANNON.Vec3(0, 0, 0));
-});
-controlsUI.left.addEventListener('touchstart', () => {
-    characterBody.applyLocalForce(new CANNON.Vec3(-200, 0, 0), new CANNON.Vec3(0, 0, 0));
-});
-controlsUI.right.addEventListener('touchstart', () => {
-    characterBody.applyLocalForce(new CANNON.Vec3(200, 0, 0), new CANNON.Vec3(0, 0, 0));
-});
-
-// Handle window resizing
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// Add challenges - simple obstacles
+// Obstacles
 function createObstacle(x, z) {
     const geometry = new THREE.BoxGeometry(5, 5, 5);
     const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
     const obstacle = new THREE.Mesh(geometry, material);
     obstacle.position.set(x, 2.5, z);
     obstacle.castShadow = true;
-    obstacle.receiveShadow = true;
     scene.add(obstacle);
 
-    // Add physics to obstacle
     const shape = new CANNON.Box(new CANNON.Vec3(2.5, 2.5, 2.5));
     const body = new CANNON.Body({ mass: 0 });
     body.addShape(shape);
     body.position.set(x, 2.5, z);
     world.addBody(body);
-
-    return obstacle;
 }
 
-// Add obstacles to the scene
-const obstacles = [];
-for (let i = 0; i < 20; i++) {
-    const x = Math.random() * gridSize * terrainSize - (gridSize * terrainSize) / 2;
-    const z = Math.random() * gridSize * terrainSize - (gridSize * terrainSize) / 2;
-    const obstacle = createObstacle(x, z);
-    obstacles.push(obstacle);
+// Create 10 random obstacles
+for (let i = 0; i < 10; i++) {
+    const x = Math.random() * 500 - 250;
+    const z = Math.random() * 500 - 250;
+    createObstacle(x, z);
 }
 
-// Add NPCs (non-player characters)
+// NPCs
 function createNPC(x, z, message) {
     const geometry = new THREE.BoxGeometry(2, 4, 2);
     const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
     const npc = new THREE.Mesh(geometry, material);
     npc.position.set(x, 2, z);
     npc.castShadow = true;
-    npc.receiveShadow = true;
     scene.add(npc);
-
-    // Interaction logic
-    const npcShape = new CANNON.Box(new CANNON.Vec3(1, 2, 1));
-    const npcBody = new CANNON.Body({ mass: 0 });
-    npcBody.addShape(npcShape);
-    npcBody.position.set(x, 2, z);
-    world.addBody(npcBody);
 
     npc.userData = { message };
 
     return npc;
 }
 
-// Add NPCs to the scene
 const npcs = [];
-npcs.push(createNPC(10, 10, "Welcome to the village! Find the elder to get your first clue."));
-npcs.push(createNPC(-20, -20, "Watch out for the traps in the forest!"));
-
-function checkInteractions() {
-    if (character && characterBody) {
-        npcs.forEach(npc => {
-            if (npc.position.distanceTo(character.position) < 5) {
-                document.getElementById('story').innerText = npc.userData.message;
-            }
-        });
-    }
+const npcMessages = ["Welcome!", "Beware of the traps!", "Find the key to unlock the treasure."];
+for (let i = 0; i < npcMessages.length; i++) {
+    const x = Math.random() * 500 - 250;
+    const z = Math.random() * 500 - 250;
+    npcs.push(createNPC(x, z, npcMessages[i]));
 }
 
-// Add tasks and goals
+// Tasks
 function createTask(x, z, description) {
-    const geometry = new THREE.BoxGeometry(3, 3, 3);
+    const geometry = new THREE.SphereGeometry(3, 32, 32);
     const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
     const task = new THREE.Mesh(geometry, material);
-    task.position.set(x, 1.5, z);
+    task.position.set(x, 3, z);
     task.castShadow = true;
-    task.receiveShadow = true;
     scene.add(task);
-
-    // Interaction logic
-    const taskShape = new CANNON.Box(new CANNON.Vec3(1.5, 1.5, 1.5));
-    const taskBody = new CANNON.Body({ mass: 0 });
-    taskBody.addShape(taskShape);
-    taskBody.position.set(x, 1.5, z);
-    world.addBody(taskBody);
 
     task.userData = { description };
 
     return task;
 }
 
-// Add tasks to the scene
 const tasks = [];
-tasks.push(createTask(15, 15, "Find the hidden key in the forest."));
-tasks.push(createTask(-25, -25, "Solve the puzzle to open the cave entrance."));
+const taskDescriptions = ["Find the key.", "Solve the puzzle.", "Defeat the boss!"];
+for (let i = 0; i < taskDescriptions.length; i++) {
+    const x = Math.random() * 500 - 250;
+    const z = Math.random() * 500 - 250;
+    tasks.push(createTask(x, z, taskDescriptions[i]));
+}
 
-function checkTasks() {
+// Interaction checking
+function checkInteractions() {
+    npcs.forEach((npc) => {
+        if (character && characterBody && npc.position.distanceTo(character.position) < 10) {
+            document.getElementById("story").innerText = npc.userData.message;
+        }
+    });
+
+    tasks.forEach((task) => {
+        if (character && characterBody && task.position.distanceTo(character.position) < 10) {
+            document.getElementById("story").innerText = task.userData.description;
+        }
+    });
+}
+
+// Game loop
+function animate() {
+    requestAnimationFrame(animate);
+
+    // Physics update
+    world.step(1 / 60);
+
+    // Character sync
     if (character && characterBody) {
-        tasks.forEach(task => {
-            if (task.position.distanceTo(character.position) < 5) {
-                document.getElementById('story').innerText = task.userData.description;
-            }
-        });
+        character.position.copy(characterBody.position);
+        character.quaternion.copy(characterBody.quaternion);
     }
+
+    controls.update();
+    renderer.render(scene, camera);
+    checkInteractions();
 }
 
-// Main game loop
-function gameLoop() {
-    checkInteractions();
-    checkTasks();
-    requestAnimationFrame(gameLoop);
-}
-gameLoop();
+// Start game
+camera.position.set(0, 50, 150);
+camera.lookAt(0, 0, 0);
+animate();
