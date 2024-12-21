@@ -14,7 +14,7 @@ function sendMessage() {
     // Show typing indicator
     document.getElementById('typingIndicator').classList.remove('hidden');
 
-    fetch('http://localhost:8080/chat', {
+    fetch('/api/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
